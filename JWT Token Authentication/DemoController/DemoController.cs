@@ -9,10 +9,10 @@ namespace JWT_Token_Authentication.DemoController
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class DemoProductController : ControllerBase
+    public class DemoController : ControllerBase
     {
         private readonly IProduct _product;
-        public DemoProductController(IProduct product) 
+        public DemoController(IProduct product) 
         { 
             _product = product;
         }

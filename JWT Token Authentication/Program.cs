@@ -38,14 +38,16 @@ builder.Services.AddAuthentication(options =>
    {
        options.SaveToken = true;
        options.RequireHttpsMetadata = false;
-       options.TokenValidationParameters = new TokenValidationParameters()
+	   options.TokenValidationParameters = new TokenValidationParameters()
        {
            ValidateIssuer = true,
            ValidateAudience = true,
            ValidAudience = configuration["JWT:ValidAudience"],
            ValidIssuer = configuration["JWT:ValidIssuer"],
-           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
-       };
+           #pragma warning disable CS8604 // Possible null reference argument.
+		   IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
+           #pragma warning restore CS8604 // Possible null reference argument.
+	   };
    });
 
 // Add services to the container.

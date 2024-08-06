@@ -75,16 +75,18 @@ namespace JWT_Token_Authentication.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.Username ?? "");
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password ?? ""))
+            var user = await _userManager.FindByNameAsync(model.Username);
+            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 
+                #pragma warning disable CS8604 // Possible null reference argument.
                 var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.UserName ?? ""),
+                    new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
+                #pragma warning restore CS8604 // Possible null reference argument.
 
                 foreach (var userRole in userRoles)
                 {

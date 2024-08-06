@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JWT_Token_Authentication.DemoController
+namespace JWT_Token_Authentication.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
@@ -12,8 +12,8 @@ namespace JWT_Token_Authentication.DemoController
     public class DemoController : ControllerBase
     {
         private readonly IProduct _product;
-        public DemoController(IProduct product) 
-        { 
+        public DemoController(IProduct product)
+        {
             _product = product;
         }
 
@@ -24,7 +24,7 @@ namespace JWT_Token_Authentication.DemoController
         }
 
         [HttpPost]
-        public IActionResult CreateProducts([FromBody] Product product) 
+        public IActionResult CreateProducts([FromBody] Product product)
         {
             _product.CreateProduct(product);
             return Ok("Product Created Succesfully");

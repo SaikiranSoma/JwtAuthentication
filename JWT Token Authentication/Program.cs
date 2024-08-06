@@ -57,7 +57,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddScoped<IValidator<RegisterModel>, RegisterValidator>();
-builder.Services.AddScoped<IValidator<LoginModel>, LoginValidation>();
+builder.Services.AddScoped<IValidator<LoginModel>, LoginValidator>();
 builder.Services.AddControllers();
 
 var app = builder.Build();

@@ -3,9 +3,9 @@ using JWT_Token_Authentication.Models;
 
 namespace JWT_Token_Authentication.Validations
 {
-    public class LoginValidation : AbstractValidator<LoginModel>
+    public class LoginValidator : AbstractValidator<LoginModel>
     {
-        public LoginValidation()
+        public LoginValidator()
         {
             RuleFor(login => login.Username)
                 .NotEmpty().WithMessage("Username must not be empty");

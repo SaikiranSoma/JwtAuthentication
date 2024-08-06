@@ -1,4 +1,8 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using JWT_Token_Authentication.Data;
+using JWT_Token_Authentication.Model;
+using JWT_Token_Authentication.Validations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
@@ -6,8 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using FluentValidation;
-
 var builder = WebApplication.CreateBuilder(args);
 
 //Adding applicationdbcontext 
@@ -51,6 +53,9 @@ builder.Services.AddAuthentication(options =>
 
 // Add services to the container.
 
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddScoped<IValidator<RegisterModel>, RegisterValidator>();
 builder.Services.AddControllers();
 
 var app = builder.Build();

@@ -89,9 +89,7 @@ namespace JWT_Token_Authentication.Controllers
                 #pragma warning restore CS8604 // Possible null reference argument.
 
                 foreach (var userRole in userRoles)
-                {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
 
                 var token = GetToken(authClaims);
 

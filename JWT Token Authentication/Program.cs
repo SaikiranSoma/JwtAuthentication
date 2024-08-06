@@ -47,14 +47,16 @@ builder.Services.AddAuthentication(options =>
 
 
 
+
 // Add services to the container.
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
+app.UseHttpsRedirection();
 
-// Configure the HTTP request pipeline.
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

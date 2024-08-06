@@ -14,6 +14,6 @@ namespace JWT_Token_Authentication.RepositoryDemo
             return product;
         }
 
-		public IEnumerable<Product> GetAllProducts() => _context.products.ToList();
+		public IEnumerable<Product> GetAllProducts() => _context.Products.ToList();
 	}
 }

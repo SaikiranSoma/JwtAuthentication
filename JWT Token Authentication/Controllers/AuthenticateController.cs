@@ -12,24 +12,24 @@ namespace JWT_Token_Authentication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticateController : ControllerBase
+    public class AuthenticateController(
+		UserManager<IdentityUser> userManager,
+        RoleManager<IdentityRole> roleManager,
+        IConfiguration configuration
+		) : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _configuration;
-
-        public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
-        {
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _configuration = configuration;
-            _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-            _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-        }
+        private readonly UserManager<IdentityUser> _userManager = userManager;
+        private readonly RoleManager<IdentityRole> _roleManager = roleManager;
+        private readonly IConfiguration _configuration = configuration;
 
         private async Task<IActionResult> Register(RegisterModel model, params string[] roles)
         {
-            var userExists = await _userManager.FindByNameAsync(model.Username);
+            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+				await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+			if (await _roleManager.RoleExistsAsync(UserRoles.User))
+				await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+			var userExists = await _userManager.FindByNameAsync(model.Username);
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
@@ -80,13 +80,11 @@ namespace JWT_Token_Authentication.Controllers
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 
-                #pragma warning disable CS8604 // Possible null reference argument.
                 var authClaims = new List<Claim>
                 {
                     new (ClaimTypes.Name, user.UserName ?? ""),
                     new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
-                #pragma warning restore CS8604 // Possible null reference argument.
 
                 foreach (var userRole in userRoles)
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));

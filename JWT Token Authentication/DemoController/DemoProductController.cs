@@ -1,4 +1,4 @@
-﻿using JWT_Token_Authentication.ModelDemo;
+﻿using JWT_Token_Authentication.Models;
 using JWT_Token_Authentication.RepositoryDemo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -9,15 +9,11 @@ namespace JWT_Token_Authentication.DemoController
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class DemoProductController : ControllerBase
+    public class DemoProductController(IProduct product) : ControllerBase
     {
-        private readonly IProduct _product;
-        public DemoProductController(IProduct product) 
-        { 
-            _product = product;
-        }
+        private readonly IProduct _product = product;
 
-        [HttpGet]
+		[HttpGet]
         public IActionResult GetAllProducts()
         {
             return Ok(_product.GetAllProducts());

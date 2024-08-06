@@ -1,14 +1,10 @@
-﻿using JWT_Token_Authentication.ModelDemo;
+﻿using JWT_Token_Authentication.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace JWT_Token_Authentication.DataDemo
 {
-    public class ProductDbContext : DbContext
+    public class ProductDbContext(DbContextOptions<ProductDbContext> options) : DbContext(options)
     {
-        public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options)
-        {
-            
-        }
-        public DbSet<Product> products { get; set; }
+		public DbSet<Product> products { get; set; }
     }
 }

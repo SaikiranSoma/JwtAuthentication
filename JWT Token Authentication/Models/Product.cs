@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JWT_Token_Authentication.ModelDemo
+namespace JWT_Token_Authentication.Models
 {
     public class Product
     {

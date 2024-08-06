@@ -1,5 +1,5 @@
 ﻿using JWT_Token_Authentication.Data;
-using JWT_Token_Authentication.ModelDemo;
+using JWT_Token_Authentication.Models;
 
 namespace JWT_Token_Authentication.RepositoryDemo
 {

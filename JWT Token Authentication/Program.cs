@@ -1,7 +1,6 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using JWT_Token_Authentication.Data;
-using JWT_Token_Authentication.DataDemo;
 using JWT_Token_Authentication.Model;
 using JWT_Token_Authentication.ModelDemo;
 using JWT_Token_Authentication.Models;

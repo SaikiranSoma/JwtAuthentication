@@ -24,9 +24,9 @@ namespace JWT_Token_Authentication.Controllers
 
         private async Task<IActionResult> Register(RegisterModel model, params string[] roles)
         {
-            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
 				await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-			if (await _roleManager.RoleExistsAsync(UserRoles.User))
+			if (!await _roleManager.RoleExistsAsync(UserRoles.User))
 				await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
 			var userExists = await _userManager.FindByNameAsync(model.Username);

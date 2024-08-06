@@ -4,6 +4,7 @@ using JWT_Token_Authentication.Data;
 using JWT_Token_Authentication.DataDemo;
 using JWT_Token_Authentication.Model;
 using JWT_Token_Authentication.Models;
+using JWT_Token_Authentication.RepositoryDemo;
 using JWT_Token_Authentication.Validations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -53,6 +54,13 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddScoped<IValidator<RegisterModel>, RegisterValidator>();
 builder.Services.AddScoped<IValidator<LoginModel>, LoginValidator>();
+
+builder.Services.AddDbContext<ProductDbContext>(options =>
+{
+    options.UseInMemoryDatabase("ProductDB");
+});
+builder.Services.AddScoped<IProduct, ProductServices>();
+
 builder.Services.AddControllers();
 
 var app = builder.Build();

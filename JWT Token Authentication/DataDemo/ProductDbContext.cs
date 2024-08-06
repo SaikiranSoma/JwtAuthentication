@@ -5,6 +5,6 @@ namespace JWT_Token_Authentication.DataDemo
 {
     public class ProductDbContext(DbContextOptions<ProductDbContext> options) : DbContext(options)
     {
-		public DbSet<Product> products { get; set; }
+		public DbSet<Product> Products { get; set; }
     }
 }

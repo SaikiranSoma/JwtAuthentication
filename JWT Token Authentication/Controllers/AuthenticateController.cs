@@ -53,9 +53,9 @@ namespace JWT_Token_Authentication.Controllers
         public async Task<IActionResult> RegisterUser([FromBody] RegisterModel model)
         {
             string[] roles =
-            {
+            [
                 UserRoles.User
-            };
+            ];
             return await Register(model, roles);
         }
 
@@ -64,10 +64,10 @@ namespace JWT_Token_Authentication.Controllers
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
         {
             string[] roles =
-            {
+            [
                 UserRoles.Admin,
                 UserRoles.User
-            };
+            ];
             return await Register(model, roles);
         }
 
@@ -83,8 +83,8 @@ namespace JWT_Token_Authentication.Controllers
                 #pragma warning disable CS8604 // Possible null reference argument.
                 var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new (ClaimTypes.Name, user.UserName ?? ""),
+                    new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
                 #pragma warning restore CS8604 // Possible null reference argument.
 

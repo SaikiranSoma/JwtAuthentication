@@ -11,8 +11,11 @@ namespace JWT_Token_Authentication.Data
         
         
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
 
-        
 
 
     }

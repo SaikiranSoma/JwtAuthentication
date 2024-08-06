@@ -25,7 +25,6 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-
 //Adding Authentication
 
 builder.Services.AddAuthentication(options =>
@@ -44,10 +43,8 @@ builder.Services.AddAuthentication(options =>
            ValidAudience = configuration["JWT:ValidAudience"],
            ValidIssuer = configuration["JWT:ValidIssuer"],
            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
-       
        };
-       
-    });
+   });
 
 // Add services to the container.
 

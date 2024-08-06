@@ -1,8 +1,8 @@
-﻿using JWT_Token_Authentication.Models;
-using JWT_Token_Authentication.RepositoryDemo;
+﻿using JWT_Token_Authentication.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace JWT_Token_Authentication.Controllers
 {
@@ -11,23 +11,21 @@ namespace JWT_Token_Authentication.Controllers
     [ApiController]
     public class DemoController : ControllerBase
     {
-        private readonly IProduct _product;
-        public DemoController(IProduct product)
-        {
-            _product = product;
-        }
+        private readonly List<string> _strings;
 
-        [HttpGet]
-        public IActionResult GetAllProducts()
-        {
-            return Ok(_product.GetAllProducts());
-        }
+        public DemoController() => _strings = [];
 
-        [HttpPost]
-        public IActionResult CreateProducts([FromBody] Product product)
+        [Authorize(Roles = UserRoles.Admin)]
+		[Authorize(Roles = UserRoles.User)]
+        [HttpGet("GetStrings")]
+        public IActionResult GetAllStrings() => Ok(_strings);
+
+		[Authorize(Roles = UserRoles.Admin)]
+		[HttpPost("AddString/{str}")]
+        public IActionResult CreateProducts([FromRoute] string str)
         {
-            _product.CreateProduct(product);
-            return Ok("Product Created Succesfully");
+            _strings.Add(str);
+            return Ok("String Added Succesfully");
         }
     }
 }

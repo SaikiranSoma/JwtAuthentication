@@ -12,7 +12,7 @@ namespace JWT_Token_Authentication.Validations
             RuleFor(obj => obj.Password)
                 .NotEmpty().WithMessage("Password is required")
                 .MinimumLength(8).WithMessage("Password must be atleast 8 characters long")
-                .Matches(@"^(?=.* [A - Z])(?=.*\d)(?=.* [\W_]).+$").WithMessage("Password must have atleast 1 Capital Letter, 1 Number, 1 Special Character");
+                .Matches(@"^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$").WithMessage("Password must have atleast 1 Capital Letter, 1 Number, 1 Special Character");
         }
     }
 }

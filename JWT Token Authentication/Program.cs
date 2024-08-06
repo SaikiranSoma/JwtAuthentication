@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using JWT_Token_Authentication.Data;
 using JWT_Token_Authentication.DataDemo;
 using JWT_Token_Authentication.Model;
+using JWT_Token_Authentication.ModelDemo;
 using JWT_Token_Authentication.Models;
 using JWT_Token_Authentication.RepositoryDemo;
 using JWT_Token_Authentication.Validations;
@@ -64,6 +65,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddScoped<IValidator<RegisterModel>, RegisterValidator>();
 builder.Services.AddScoped<IValidator<LoginModel>, LoginValidator>();
+builder.Services.AddScoped<IValidator<Product>, ProductValidator>();
 builder.Services.AddControllers();
 
 var app = builder.Build();

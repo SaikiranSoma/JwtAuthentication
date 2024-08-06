@@ -1,4 +1,4 @@
-﻿using JWT_Token_Authentication.DataDemo;
+﻿using JWT_Token_Authentication.Data;
 using JWT_Token_Authentication.Models;
 
 namespace JWT_Token_Authentication.RepositoryDemo

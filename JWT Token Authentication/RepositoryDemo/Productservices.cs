@@ -3,7 +3,7 @@ using JWT_Token_Authentication.Models;
 
 namespace JWT_Token_Authentication.RepositoryDemo
 {
-    public class Productservices(ProductDbContext context) : IProduct
+    public class ProductServices(ProductDbContext context) : IProduct
     {
         private readonly ProductDbContext _context = context;
 
@@ -14,6 +14,6 @@ namespace JWT_Token_Authentication.RepositoryDemo
             return product;
         }
 
-		public IEnumerable<Product> GetAllProducts() => _context.products.ToList();
+		public IEnumerable<Product> GetAllProducts() => _context.Products.ToList();
 	}
 }

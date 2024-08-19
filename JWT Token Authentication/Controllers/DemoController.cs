@@ -15,18 +15,17 @@ namespace JWT_Token_Authentication.Controllers
         private readonly IProduct _product = product;
 
         [Authorize(Roles = UserRoles.User)]
-        [HttpGet("GetProducts")]
-        public IActionResult GetAllProducts()
+        [HttpGet("User")]
+        public IActionResult HelloUser()
         {
-            return Ok(_product.GetAllProducts());
+            return Ok("Hello User");
         }
 
         [Authorize(Roles = UserRoles.Admin)]
-        [HttpPost("CreateProduct")]
-        public IActionResult CreateProducts([FromBody] Product product)
+        [HttpGet("Admin")]
+        public IActionResult HelloAdmin()
         {
-            _product.CreateProduct(product);
-            return Ok("Product Created Succesfully");
+            return Ok("Hello Admin");
         }
     }
 }
